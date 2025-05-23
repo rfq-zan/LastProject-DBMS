@@ -5,6 +5,13 @@ session_start();
 $username = $_POST['username'];
 $input = isset($_POST['password']) ? $_POST['password'] : $_POST['phone'];
 
+if (!isset($_POST['password'])) {
+    if (!preg_match('/^[0-9]+$/', $input)) {
+        echo "<script>alert('Nomor telepon hanya boleh angka.'); window.location.href='login.php';</script>";
+        exit;
+    }
+}
+
 $stmt = $conn->prepare("CALL proses_login_user(?, ?)");
 $stmt->bind_param("ss", $username, $input);
 $stmt->execute();
