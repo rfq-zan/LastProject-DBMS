@@ -241,6 +241,8 @@
         loginField.type = 'tel';
         loginField.placeholder = 'Enter your phone number';
         loginField.name = 'phone';
+        loginField.setAttribute('pattern', '[0-9]*');
+        loginField.setAttribute('oninput', "this.value = this.value.replace(/[^0-9]/g, '')");
         adminMode.style.display = 'none';
       }
     });
